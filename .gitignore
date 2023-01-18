@@ -35,3 +35,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+calendar-app-9cb0b-firebase-adminsdk-6i8fa-deda2fc4b2.json
