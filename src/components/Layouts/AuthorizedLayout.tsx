@@ -1,28 +1,18 @@
+import { useAuthorizedHandler } from "@/hooks/auth/useAuth";
 import { Button, Container } from "@mui/material";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 type UnauthorizedLayoutProps = {
   children: React.ReactNode;
 };
 
 const AuthorizedLayout = ({ children }: UnauthorizedLayoutProps) => {
-  const router = useRouter();
-  const auth = getAuth();
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        router.push("/login");
-      }
-    });
-  }, []);
+  const { handleSignOut: signOut } = useAuthorizedHandler();
 
   return (
     <>
-      <Container maxWidth="sm">
+      <Container maxWidth="md">
         {children}
-        <Button onClick={() => signOut(auth)}>ログアウト</Button>
+        <Button onClick={signOut}>ログアウト</Button>
       </Container>
     </>
   );
